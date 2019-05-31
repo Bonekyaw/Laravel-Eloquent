@@ -41,4 +41,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(\App\Phone::class);
     }
+    public function posts()
+    {
+        return $this->hasMany(\App\Post::class);
+    }
 }

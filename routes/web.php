@@ -11,10 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/post', function() {
+    $user = factory(\App\User::class)->create();
+    $user->posts()->create([
+        'title' => 'My Post',
+        'body' => 'My name is Bone'
+    ]);
+    $user->posts->first()->title = 'Change Name';
+    $user->push();
+    dd(App\Post::all());
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
