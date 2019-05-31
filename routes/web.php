@@ -19,13 +19,23 @@
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/post', function() {
-    $user = factory(\App\User::class)->create();
-    $user->posts()->create([
-        'title' => 'My Post',
-        'body' => 'My name is Bone'
-    ]);
-    $user->posts->first()->title = 'Change Name';
-    $user->push();
-    dd(App\Post::all());
+// Route::get('/post', function() {
+//     $user = factory(\App\User::class)->create();
+//     $user->posts()->create([
+//         'title' => 'My Post',
+//         'body' => 'My name is Bone'
+//     ]);
+//     $user->posts->first()->title = 'Change Name';
+//     $user->push();
+//     dd(App\Post::all());
+// });
+
+Route::get('/role', function(){
+    $user = App\User::first();
+    $roles = App\Role::all();
+    $user->roles()->syncWithoutDetaching([1,4]);
+    // $user->roles()->sync([2,4]);
+    // $user->roles()->detach(1);
+    // $user->roles()->attach($roles);
+    dd($roles);
 });
