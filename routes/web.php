@@ -30,12 +30,25 @@
 //     dd(App\Post::all());
 // });
 
-Route::get('/role', function(){
+// Route::get('/role', function(){
+//     $user = App\User::first();
+//     $roles = App\Role::all();
+//     $user->roles()->syncWithoutDetaching([1,4]);
+//     // $user->roles()->sync([2,4]);
+//     // $user->roles()->detach(1);
+//     // $user->roles()->attach($roles);
+//     dd($roles);
+// });
+
+Route::get('/pivot', function(){
     $user = App\User::first();
-    $roles = App\Role::all();
-    $user->roles()->syncWithoutDetaching([1,4]);
-    // $user->roles()->sync([2,4]);
-    // $user->roles()->detach(1);
-    // $user->roles()->attach($roles);
-    dd($roles);
+    $user->roles()->sync([
+        1 => [
+            'name' => 'Bone Kyaw'
+        ],
+        3 => [
+            'name' => 'Moe Moe'
+        ]
+        ]);
+    dd($user->roles->first()->pivot->name);
 });
